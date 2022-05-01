@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contact Manager</title>
+  <link rel="stylesheet" href=/stylesheets/main.css>
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/handlebars.js"></script>
+  <script type= "module" src="/javascripts/app.js"></script>
+</head>
+<body>
+  <script id='formTemplate' type='text/x-handlebars'>
+    <form class='contact-form' hidden>
+      <h3>{{formTitle}}</h3>
+      <label for='full_name'>Full name: </label>
+      <input name="full_name" type='text' required>
+      <label for='email'>Email address: </label>
+      <input name='email' type='email' required>
+      <label for="phone_number">Telephone number: </label>
+      <input name="phone_number" type=tel required>
+      <label for='tags'>Tags: </label>
+      <input name='tags' type='text'>
+      <button type="submit">Submit</button>
+      <button type="button">Cancel</button>
+    </form>
+  </script>
+  <script id='contactTemplate' type='text/x-handlebars'>
+    {{#each contacts}}
+      <li id="contact_{{id}}" class='contact'>
+        <div class='contact-heading' name='full_name'><h3>{{full_name}}</h3></div>     
+        <div class='contact-body'>
+          <dl>
+            <dt>Phone Number: </dt>
+            <dd name='phone_number'>{{phone_number}}</dd>
+            <dt>Email: </dt>
+            <dd name='email'>{{email}}</dd>
+          </dl>
+        </div>
+        <div class='contact-tags'>
+          <ul>
+            {{#if tags}}
+              {{#each tags}}
+                <li class='tag'>{{tag}}</li>
+              {{/each}}
+            {{else}}
+              <li class='no-tags'>[   tags: none    ]</li>
+            {{/if}}
+          </ul>
+        </div>
+        <div class='contact-buttons'>
+          <button class='edit-contact' type="button">Edit</button>
+          <button class='delete-contact' type='button'>Delete</button>
+        </div>
+      </li>
+    {{/each}}
+  </script>
+</body>
+</html>
